@@ -5,9 +5,9 @@ Port {{ sshd_port }}
   ListenAddress {{ address }}
 {% endfor %}
 Protocol {{ sshd_protocol }}
-HostKey {{ sshd_host_rsa_key }}
-HostKey {{ sshd_host_dsa_key }}
-HostKey {{ sshd_host_ecdsa_key }}
+{% for hostKey in sshd_host_key %}
+  HostKey {{ hostKey }}
+{% endfor %}
 UsePrivilegeSeparation {{ sshd_use_privilege_separation }}
 KeyRegenerationInterval {{ sshd_key_regeneration_interval }}
 ServerKeyBits {{ sshd_server_key_bits }}
@@ -38,3 +38,7 @@ Banner {{ sshd_banner }}
 AcceptEnv {{ sshd_accept_env }}
 Subsystem {{ sshd_subsystem }}
 UsePAM {{ sshd_use_pam }}
+AllowGroups {{ sshd_allow_Groups }}
+KexAlgorithms {{ sshd_kex_algorithms }}
+Ciphers {{ sshd_ciphers }}
+MACs {{ sshd_macs }}
